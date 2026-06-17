@@ -121,6 +121,8 @@ export interface BankOffer {
   store_id?: string;
   store?: Store;
   terms: string[];
+  code?: string;
+  isExclusive?: boolean;
 }
 
 export type SortOption = 'newest' | 'expiring_soon' | 'most_popular' | 'discount_high';
