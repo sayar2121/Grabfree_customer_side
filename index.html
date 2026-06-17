@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GrabFree - India's most trusted coupon and deal aggregation platform. Find verified promo codes, exclusive deals and cashback offers from 500+ top stores." />
+    <meta name="keywords" content="coupons, deals, promo codes, discount codes, offers, cashback, India, online shopping" />
+    <meta property="og:title" content="GrabFree - Best Deals & Coupons in India" />
+    <meta property="og:description" content="Discover verified promo codes and exclusive deals from 500+ top Indian stores." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FF6B35" />
+    <title>GrabFree - Grab the Best Deals & Coupons in India</title>
+    <script>
+      try {
+        var theme = localStorage.getItem('grabfree-theme');
+        var isDark = true;
+        if (theme) { isDark = JSON.parse(theme).state.isDark; }
+        if (isDark) { document.documentElement.classList.add('dark'); }
+        else { document.documentElement.classList.remove('dark'); }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

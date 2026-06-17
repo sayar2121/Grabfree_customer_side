@@ -1,0 +1,554 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', system-ui, sans-serif;
+
+  --color-brand-orange: #FF6B35;
+  --color-brand-red: #FF3B6B;
+  --color-brand-violet: #7C3AED;
+  --color-brand-navy: #0F1628;
+  --color-brand-dark: #080D1A;
+  --color-brand-darker: #050910;
+
+  --background-image-gradient-brand: linear-gradient(135deg, #FF6B35 0%, #FF3B6B 100%);
+  --background-image-gradient-violet: linear-gradient(135deg, #7C3AED 0%, #FF3B6B 100%);
+  --background-image-gradient-dark: linear-gradient(180deg, #080D1A 0%, #0F1628 100%);
+  --background-image-gradient-card: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(255,59,107,0.05) 100%);
+
+  --shadow-brand: 0 0 40px rgba(255, 107, 53, 0.25);
+  --shadow-brand-sm: 0 0 20px rgba(255, 107, 53, 0.15);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 60px rgba(255, 59, 107, 0.3);
+
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-slide-up: slideUp 0.5s ease-out forwards;
+  --animate-shimmer: shimmer 2s infinite linear;
+  --animate-float: float 6s ease-in-out infinite;
+
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+}
+
+/* ── THEME TOKENS ──────────────────────────────────────────────────── */
+/* Dark mode (default) */
+:root {
+  --bg-primary:        #080D1A;
+  --bg-secondary:      #0A0F1E;
+  --bg-tertiary:       #0F1628;
+  --bg-card:           rgba(255, 255, 255, 0.04);
+  --bg-card-hover:     rgba(255, 255, 255, 0.07);
+  --bg-input:          rgba(255, 255, 255, 0.06);
+  --bg-subtle:         rgba(255, 255, 255, 0.03);
+  --bg-footer:         #050910;
+
+  --border-base:       rgba(255, 255, 255, 0.08);
+  --border-subtle:     rgba(255, 255, 255, 0.06);
+  --border-strong:     rgba(255, 255, 255, 0.12);
+  --border-input:      rgba(255, 255, 255, 0.10);
+
+  --text-primary:      #F1F5F9;
+  --text-secondary:    #94A3B8;
+  --text-muted:        #64748B;
+  --text-faint:        #475569;
+
+  --nav-bg-scrolled:   rgba(8, 13, 26, 0.90);
+  --modal-bg:          #0F1628;
+  --code-box-bg:       #0F1628;
+
+  --scrollbar-track:   #0F1628;
+
+  --shadow-card-theme: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Light mode */
+.dark\:off,
+html:not(.dark) {
+  --bg-primary:        #FDFBF7;
+  --bg-secondary:      #F5F2EB;
+  --bg-tertiary:       #EBE5DA;
+  --bg-card:           rgba(255, 253, 249, 0.85);
+  --bg-card-hover:     rgba(255, 255, 255, 0.95);
+  --bg-input:          rgba(255, 253, 249, 0.90);
+  --bg-subtle:         rgba(0, 0, 0, 0.02);
+  --bg-footer:         #1E293B;
+
+  --border-base:       rgba(0, 0, 0, 0.08);
+  --border-subtle:     rgba(0, 0, 0, 0.06);
+  --border-strong:     rgba(0, 0, 0, 0.14);
+  --border-input:      rgba(0, 0, 0, 0.12);
+
+  --text-primary:      #0F172A;
+  --text-secondary:    #475569;
+  --text-muted:        #64748B;
+  --text-faint:        #94A3B8;
+
+  --nav-bg-scrolled:   rgba(253, 251, 247, 0.92);
+  --modal-bg:          #FDFBF7;
+  --code-box-bg:       #F5F2EB;
+
+  --scrollbar-track:   #E2E8F0;
+
+  --shadow-card-theme: 0 8px 32px rgba(0, 0, 0, 0.10);
+}
+
+/* ── KEYFRAMES ──────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── BASE ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF6B35, #FF3B6B);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF3B6B, #7C3AED);
+}
+
+::selection {
+  background: rgba(255, 107, 53, 0.3);
+  color: #FF6B35;
+}
+
+/* ── GLASS CARD ─────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-base);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 107, 53, 0.3);
+  box-shadow: var(--shadow-card-theme), 0 0 20px rgba(255, 107, 53, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Light mode glass card needs a bit more definition */
+html:not(.dark) .glass-card {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+html:not(.dark) .glass-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 0 20px rgba(255, 107, 53, 0.12);
+}
+
+/* ── BRAND BUTTON ───────────────────────────────────────────────────── */
+.btn-brand {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF3B6B 100%);
+  color: white;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FF3B6B 0%, #FF6B35 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-brand:hover::before { opacity: 1; }
+
+.btn-brand:hover {
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-brand span {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── GHOST BUTTON ───────────────────────────────────────────────────── */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  background: rgba(255, 107, 53, 0.08);
+  color: #FF6B35;
+}
+
+/* ── SECTION CONTAINER ──────────────────────────────────────────────── */
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+/* ── GRADIENT TEXT ──────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF3B6B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-violet {
+  background: linear-gradient(135deg, #7C3AED 0%, #FF3B6B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── SKELETON ───────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    var(--border-base) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 8px;
+}
+
+/* ── COUPON DIVIDER ─────────────────────────────────────────────────── */
+.coupon-divider {
+  position: relative;
+  overflow: hidden;
+}
+
+.coupon-divider::before,
+.coupon-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-primary);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.coupon-divider::before { left: -10px; }
+.coupon-divider::after { right: -10px; }
+
+/* ── NAV LINK ───────────────────────────────────────────────────────── */
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #FF6B35, #FF3B6B);
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover { color: #FF6B35; }
+
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+
+.nav-link.active { color: #FF6B35; }
+
+/* ── BADGE ──────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-brand {
+  background: rgba(255, 107, 53, 0.15);
+  color: #FF6B35;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.badge-success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22C55E;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge-warning {
+  background: rgba(234, 179, 8, 0.15);
+  color: #EAB308;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.badge-violet {
+  background: rgba(124, 58, 237, 0.15);
+  color: #A78BFA;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+/* ── HERO ORBS ──────────────────────────────────────────────────────── */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Reduce orb opacity in light mode so they don't overwhelm */
+html:not(.dark) .hero-orb {
+  opacity: 0.03;
+}
+
+/* ── MARQUEE ────────────────────────────────────────────────────────── */
+.marquee-track {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── THEME-AWARE UTILITIES (used inline via style attr in components) ── */
+.theme-bg-primary    { background-color: var(--bg-primary); }
+.theme-bg-secondary  { background-color: var(--bg-secondary); }
+.theme-bg-tertiary   { background-color: var(--bg-tertiary); }
+.theme-bg-card       { background-color: var(--bg-card); }
+.theme-bg-input      { background-color: var(--bg-input); }
+.theme-bg-footer     { background-color: var(--bg-footer); }
+
+.theme-border        { border-color: var(--border-base); }
+.theme-border-base   { border-color: var(--border-base); }
+.theme-border-subtle { border-color: var(--border-subtle); }
+.theme-border-strong { border-color: var(--border-strong); }
+
+.theme-text          { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-muted    { color: var(--text-muted); }
+
+/* ── LIGHT MODE: Global text overrides ────────────────────────────── */
+/*
+ * In light mode, components that use hardcoded `text-white` would become
+ * invisible. These overrides convert them to the dark text token.
+ * `text-slate-*` stays as-is — slate is visible on light bg.
+ */
+html:not(.dark) .text-white {
+  color: var(--text-primary) !important;
+}
+
+html:not(.dark) h1.text-white,
+html:not(.dark) h2.text-white,
+html:not(.dark) h3.text-white,
+html:not(.dark) h4.text-white,
+html:not(.dark) p.text-white,
+html:not(.dark) span.text-white {
+  color: var(--text-primary) !important;
+}
+
+/* Footer is always dark — revert text-white inside it */
+html:not(.dark) .theme-bg-footer .text-white,
+html:not(.dark) footer .text-white,
+html:not(.dark) footer h1.text-white,
+html:not(.dark) footer h2.text-white,
+html:not(.dark) footer h3.text-white,
+html:not(.dark) footer h4.text-white,
+html:not(.dark) footer p.text-white,
+html:not(.dark) footer span.text-white {
+  color: #F1F5F9 !important;
+}
+html:not(.dark) footer .text-slate-400 { color: #94A3B8 !important; }
+html:not(.dark) footer .text-slate-500 { color: #CBD5E1 !important; }
+
+/* Smooth theme transition for all elements */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* But don't slow down animations */
+.marquee-track,
+.marquee-track *,
+[class*="animate-"],
+motion *,
+[style*="animation"] {
+  transition: none;
+}
+
+/* ── THEME-AWARE INPUT / SELECT ─────────────────────────────────────── */
+.input-theme {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-primary);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input-theme::placeholder {
+  color: var(--text-muted);
+}
+
+.input-theme:focus {
+  outline: none;
+  border-color: rgba(255, 107, 53, 0.5);
+}
+
+.select-theme {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-primary);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.select-theme:focus {
+  outline: none;
+  border-color: rgba(255, 107, 53, 0.5);
+}
+
+/* Fix for select option background in light mode */
+html:not(.dark) .select-theme option {
+  background-color: #FFFFFF;
+  color: #0F172A;
+}
+
+/* ── THEME-AWARE ICON BUTTON ────────────────────────────────────────── */
+.icon-btn-theme {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-base);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.icon-btn-theme:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: rgba(255, 107, 53, 0.4);
+}
+
+/* ── PILL BUTTON (inactive state) ───────────────────────────────────── */
+.pill-inactive {
+  background-color: var(--bg-input);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-base);
+}
+
+.pill-inactive:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-card-hover);
+}
+
+/* ── STORE DETAILS TAB ──────────────────────────────────────────────── */
+.tab-border {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+
+
+/* ── POPULAR OFFER CARD ──────────────────────────────────────────────── */
+.popular-offer-img {
+  height: 176px;
+  transition: height 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.popular-offer-card:hover .popular-offer-img {
+  height: 110px;
+}
+
+.popular-offer-btn-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.popular-offer-card:hover .popular-offer-btn-wrap {
+  grid-template-rows: 1fr;
+}
+
+.popular-offer-card:hover .popular-offer-img img {
+  transform: scale(1.05);
+}
