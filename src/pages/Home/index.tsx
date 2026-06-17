@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, ArrowRight, Sparkles, TrendingUp, Store, Zap, ChevronRight } from 'lucide-react';
@@ -28,6 +28,19 @@ const CardSkeleton = () => (
 export default function HomePage() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Handle hash scrolling on page load (e.g. arriving from another page via mobile menu)
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
 
   const { data: featuredStores, isLoading: storesLoading } = useFeaturedStores();
   const { data: latestCoupons, isLoading: couponsLoading } = useLatestCoupons(8);
@@ -78,9 +91,12 @@ export default function HomePage() {
             onSubmit={handleSearch}
             className="flex gap-3 max-w-2xl mx-auto mb-8">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none z-10" />
               <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for stores, brands or products..."
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="false"
                 className="input-theme w-full rounded-2xl pl-12 pr-4 py-4 text-base backdrop-blur-sm shadow-card"
               />
             </div>

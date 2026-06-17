@@ -66,9 +66,14 @@ export default function Navbar() {
         // If we're already on the home page, just scroll smoothly
         if (window.location.pathname === '/') {
           e.preventDefault();
-          element.scrollIntoView({ behavior: 'smooth' });
+          setIsMobileOpen(false); // Close menu immediately
+          // Add a tiny delay to allow the mobile menu closing animation to finish so the layout shift doesn't cancel the scroll
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
           window.history.pushState(null, '', path);
           setActiveHash(path.substring(1));
+          return;
         }
       }
     }
@@ -181,13 +186,16 @@ export default function Navbar() {
             >
               <div className="section-container py-4">
                 <form onSubmit={handleSearch} className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none z-10" />
                   <input
                     autoFocus
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search stores, coupons, deals..."
+                    autoComplete="off"
+                    autoCorrect="off"
+                    spellCheck="false"
                     className="w-full rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-brand-orange/50 transition-all theme-text theme-bg-input border theme-border-strong placeholder:text-[color:var(--text-muted)]"
                   />
                 </form>

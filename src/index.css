@@ -157,6 +157,16 @@ body {
   color: #FF6B35;
 }
 
+/* ── INPUTS ─────────────────────────────────────────────────────────── */
+.input-theme, .theme-bg-input {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  outline: none;
+}
+.input-theme:focus, .theme-bg-input:focus {
+  background-color: var(--bg-card);
+}
+
 /* ── GLASS CARD ─────────────────────────────────────────────────────── */
 .glass-card {
   background: var(--bg-card);
