@@ -46,13 +46,15 @@ export default function CouponCard({ coupon, index = 0 }: CouponCardProps) {
           </div>
 
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
               {coupon.is_exclusive && (
-                <span className="badge badge-brand text-[10px] px-2 py-0.5">⚡ Exclusive</span>
+                <span className="badge badge-brand text-[10px] px-2 py-0.5 flex items-center gap-0.5 whitespace-nowrap">
+                  <Zap className="w-2.5 h-2.5 shrink-0" /> Exclusive
+                </span>
               )}
               {coupon.is_verified && (
-                <span className="badge badge-success text-[10px] px-2 py-0.5 flex items-center gap-0.5">
-                  <Shield className="w-2.5 h-2.5" /> Verified
+                <span className="badge badge-success text-[10px] px-2 py-0.5 flex items-center gap-0.5 whitespace-nowrap">
+                  <Shield className="w-2.5 h-2.5 shrink-0" /> Verified
                 </span>
               )}
             </div>
