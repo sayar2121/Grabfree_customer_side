@@ -29,15 +29,15 @@ export default function ContactPage() {
     <div className="section-container py-12">
       <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-5xl mx-auto">
         <motion.div variants={itemVariants} className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-black text-white mb-3">Get in Touch</h1>
-          <p className="text-slate-400">Have a question or want to partner with us? We'd love to hear from you.</p>
+          <h1 className="text-3xl md:text-4xl font-black theme-text mb-3">Get in Touch</h1>
+          <p className="theme-text-secondary">Have a question or want to partner with us? We'd love to hear from you.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Info */}
           <motion.div variants={itemVariants} className="space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-white mb-6">Contact Information</h2>
+              <h2 className="text-xl font-bold theme-text mb-6">Contact Information</h2>
               {[
                 { icon: Mail, label: 'Email', value: 'hello@grabfree.in' },
                 { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
@@ -49,8 +49,8 @@ export default function ContactPage() {
                     <Icon className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 mb-0.5">{label}</p>
-                    <p className="text-sm font-semibold text-white">{value}</p>
+                    <p className="text-xs theme-text-muted mb-0.5">{label}</p>
+                    <p className="text-sm font-semibold theme-text">{value}</p>
                   </div>
                 </div>
               ))}
@@ -62,33 +62,33 @@ export default function ContactPage() {
             {submitted ? (
               <div className="text-center py-8">
                 <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
-                <p className="text-slate-400 text-sm">We'll get back to you within 24 hours.</p>
+                <h3 className="text-xl font-bold theme-text mb-2">Message Sent!</h3>
+                <p className="theme-text-secondary text-sm">We'll get back to you within 24 hours.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Name</label>
+                    <label className="block text-xs font-medium theme-text-secondary mb-1.5">Name</label>
                     <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="Your name"
                       className="input-theme w-full px-4 py-2.5 text-sm" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Email</label>
+                    <label className="block text-xs font-medium theme-text-secondary mb-1.5">Email</label>
                     <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="your@email.com"
                       className="input-theme w-full px-4 py-2.5 text-sm" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Subject</label>
+                  <label className="block text-xs font-medium theme-text-secondary mb-1.5">Subject</label>
                   <input type="text" required value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     placeholder="How can we help?"
                     className="input-theme w-full px-4 py-2.5 text-sm" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Message</label>
+                  <label className="block text-xs font-medium theme-text-secondary mb-1.5">Message</label>
                   <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell us more..."
                     className="input-theme w-full px-4 py-2.5 text-sm resize-none" />

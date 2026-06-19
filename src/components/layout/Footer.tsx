@@ -161,8 +161,8 @@ export default function Footer() {
                 <span>GrabFree<br/>1st Cross Street, Near Bright Way School, Bellandur</span>
               </li>
             </ul>
-            <a href="mailto:contact@grabfree.in" className="inline-flex items-center gap-2 bg-[#4279D1] hover:bg-[#3462a8] text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors">
-              <Headphones className="w-4 h-4" /> Contact Us
+            <a href="mailto:contact@grabfree.in" className="btn-brand w-fit mt-1">
+              <span><Headphones className="w-4 h-4" /> Contact Us</span>
             </a>
           </div>
         </div>
