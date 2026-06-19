@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# GrabFree Customer App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GrabFree Customer App is a modern, responsive, and highly interactive e-commerce and promotional deals platform built with React and TypeScript. It features a rich, dynamic UI designed to deliver a premium user experience, complete with animations, dark mode support, and seamless multi-platform integrations.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project is built using the following core technologies:
 
-## React Compiler
+- **Framework**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router DOM (v7)
+- **Styling**: Tailwind CSS (v4) + Class Variance Authority + clsx + tailwind-merge
+- **State Management**: Zustand (Global State) + React Query (Data Fetching/Caching)
+- **UI Components**: Radix UI (Accessible headless primitives)
+- **Animations**: Framer Motion
+- **Icons**: Lucide React & React Icons
+- **HTTP Client**: Axios
+- **Utilities**: date-fns (Date formatting), Swiper (Carousels)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Prerequisites
 
-## Expanding the ESLint configuration
+Make sure you have Node.js installed (version 18+ recommended).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository and navigate to the project directory:
+   ```bash
+   cd Grabfree_customer_side
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run dev`
+Runs the app in development mode using Vite. Open [http://localhost:5173](http://localhost:5173) to view it in the browser. The page will reload if you make edits.
+
+### `npm run build`
+Compiles TypeScript and builds the app for production to the `dist` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run preview`
+Locally preview the production build after running `npm run build`.
+
+### `npm run lint`
+Runs ESLint to analyze the code and catch potential issues.
+
+## Project Structure
+
+```
+src/
+├── components/   # Reusable UI components (Buttons, Layouts, Radix primitives, etc.)
+├── pages/        # Route components (Home, Sales, Deals of the Day, Contact, etc.)
+├── services/     # API services and external integrations (e.g., newsletterService)
+├── App.tsx       # Main Application entry point
+├── App.css       # Global styles and Tailwind imports
+└── main.tsx      # Vite entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Key Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Dynamic Promotional Pages**: Dedicated, visually stunning pages for "Deals of the Day", "June Sales", "Father's Day Offers", etc.
+- **Premium Aesthetics**: Features smooth gradients, micro-animations, and responsive layouts tailored for both light and dark themes.
+- **Advanced State Management**: Utilizes Zustand for lightweight client state and React Query for server state and caching.
+- **Swipeable Carousels**: Integrated touch-friendly swipeable banners using Swiper.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Development Guidelines
+
+- **Components**: Follow the atomic design principle where applicable. Ensure components are reusable and utilize the predefined design system via Tailwind.
+- **Styling**: Stick to the configured Tailwind theme and Radix UI primitives. Avoid adding excessive custom CSS files when utility classes suffice.
+- **Routing**: Define all routes within the `AppRouter` configuration.
+
+## License
+
+This project is proprietary and confidential.
