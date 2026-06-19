@@ -19,6 +19,10 @@ const ContactPage = lazy(() => import('@/pages/Contact'));
 const CareersPage = lazy(() => import('@/pages/Careers'));
 const SubmitCouponPage = lazy(() => import('@/pages/SubmitCoupon'));
 const ProfilePage = lazy(() => import('@/pages/Profile'));
+const WishlistPage = lazy(() => import('@/pages/Wishlist'));
+const FathersDayPage = lazy(() => import('@/pages/FathersDay'));
+const SalesPage = lazy(() => import('@/pages/Sales'));
+const DealsOfTheDayPage = lazy(() => import('@/pages/DealsOfTheDay'));
 const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
 // Legal Pages
@@ -48,7 +52,11 @@ const router = createBrowserRouter([
       { path: 'contact', element: <Suspense fallback={<PageLoader />}><ContactPage /></Suspense> },
       { path: 'careers', element: <Suspense fallback={<PageLoader />}><CareersPage /></Suspense> },
       { path: 'submit', element: <Suspense fallback={<PageLoader />}><SubmitCouponPage /></Suspense> },
+      { path: 'wishlist', element: <Suspense fallback={<PageLoader />}><WishlistPage /></Suspense> },
+      { path: 'sales', element: <Suspense fallback={<PageLoader />}><SalesPage /></Suspense> },
+      { path: 'deals-of-the-day', element: <Suspense fallback={<PageLoader />}><DealsOfTheDayPage /></Suspense> },
       { path: 'profile', element: <Suspense fallback={<PageLoader />}><ProfilePage /></Suspense> },
+      { path: 'fathers-day', element: <Suspense fallback={<PageLoader />}><FathersDayPage /></Suspense> },
       
       // Legal routes
       { path: 'privacy', element: <Suspense fallback={<PageLoader />}><PrivacyPolicyPage /></Suspense> },

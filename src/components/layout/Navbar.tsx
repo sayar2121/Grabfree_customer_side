@@ -199,9 +199,6 @@ export default function Navbar() {
                 <Link to="/sales" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
                   <Calendar className="w-4 h-4" /> June Sales
                 </Link>
-                <Link to="/indulge" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
-                  <List className="w-4 h-4" /> Indulge
-                </Link>
               </div>
 
               <div className="flex items-center gap-6">
@@ -299,9 +296,6 @@ export default function Navbar() {
                   </Link>
                   <Link to="/sales" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
                     <Calendar className="w-4 h-4 shrink-0" /> <span className="truncate">June Sales</span>
-                  </Link>
-                  <Link to="/indulge" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
-                    <List className="w-4 h-4 shrink-0" /> <span className="truncate">Indulge</span>
                   </Link>
                   
                   <div className="my-2 border-t theme-border-subtle opacity-50"></div>
