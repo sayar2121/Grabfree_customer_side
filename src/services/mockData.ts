@@ -225,7 +225,7 @@ export const MOCK_DEALS: Deal[] = [
     image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop',
     expiry_date: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString(),
     status: 'active', category: 'Beauty',
-    is_featured: true, is_trending: false,
+    is_featured: true, is_trending: true,
   },
   {
     id: 'd5', store_id: '6',
@@ -237,7 +237,7 @@ export const MOCK_DEALS: Deal[] = [
     image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&h=300&fit=crop',
     expiry_date: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString(),
     status: 'active', category: 'Travel',
-    is_featured: true, is_trending: false,
+    is_featured: true, is_trending: true,
   },
   {
     id: 'd6', store_id: '1',
@@ -261,7 +261,7 @@ export const MOCK_DEALS: Deal[] = [
     image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=300&fit=crop',
     expiry_date: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
     status: 'active', category: 'Grocery',
-    is_featured: false, is_trending: false,
+    is_featured: false, is_trending: true,
   },
   {
     id: 'd8', store_id: '12',

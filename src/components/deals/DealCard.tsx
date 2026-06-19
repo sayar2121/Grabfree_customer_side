@@ -33,7 +33,7 @@ export default function DealCard({ deal, index = 0 }: DealCardProps) {
       className="glass-card overflow-hidden group"
     >
       {/* Image */}
-      <div className="relative overflow-hidden h-44">
+      <div className="relative overflow-hidden h-32 sm:h-44">
         <img
           src={deal.image}
           alt={deal.title}
@@ -78,10 +78,10 @@ export default function DealCard({ deal, index = 0 }: DealCardProps) {
         </h3>
 
         {/* Price */}
-        <div className="flex items-baseline gap-2 mb-3">
-          <span className="text-lg font-black text-gradient">{formatPrice(deal.new_price)}</span>
-          <span className="text-sm text-slate-500 line-through">{formatPrice(deal.old_price)}</span>
-          <span className="text-xs text-green-400 font-semibold ml-auto">
+        <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mb-3">
+          <span className="text-base sm:text-lg font-black text-gradient">{formatPrice(deal.new_price)}</span>
+          <span className="text-[11px] sm:text-sm text-slate-500 line-through">{formatPrice(deal.old_price)}</span>
+          <span className="text-[10px] sm:text-xs text-green-500 font-semibold w-full sm:w-auto mt-0.5 sm:mt-0 sm:ml-auto">
             Save {formatPrice(deal.old_price - deal.new_price)}
           </span>
         </div>

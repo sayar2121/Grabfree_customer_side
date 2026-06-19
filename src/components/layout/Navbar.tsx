@@ -165,7 +165,7 @@ export default function Navbar() {
         </div>
 
         {/* Secondary Sub-nav (Bottom Tier) */}
-        <div className="border-t theme-border-subtle theme-bg-secondary">
+        <div className="hidden lg:block border-t theme-border-subtle theme-bg-primary">
           <div className="section-container overflow-x-auto scrollbar-hide">
             <div className="flex items-center justify-between h-12 min-w-max gap-8 pr-4 lg:pr-0">
               <div className="flex items-center gap-6">
@@ -251,19 +251,50 @@ export default function Navbar() {
               className="lg:hidden border-t theme-border-subtle backdrop-blur-xl overflow-hidden"
               style={{ backgroundColor: 'var(--nav-bg-scrolled)' }}
             >
-              <div className="section-container py-4 space-y-1">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={(e) => handleNavClick(e, link.path)}
-                    className={cn('block px-4 py-2.5 rounded-lg text-sm font-medium transition-all',
-                        isActiveLink(link.path) ? 'bg-gradient-card text-brand-orange border border-brand-orange/20' : 'theme-text-secondary hover:theme-text hover:theme-bg-subtle')
-                    }
-                  >
-                    {link.label}
+              <div className="section-container py-4 flex">
+                {/* Left Column: Main Nav */}
+                <div className="w-1/2 pr-2 space-y-1">
+                  {NAV_LINKS.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={(e) => handleNavClick(e, link.path)}
+                      className={cn('block px-3 py-2.5 rounded-lg text-[13px] font-medium transition-all',
+                          isActiveLink(link.path) ? 'bg-gradient-card text-brand-orange border border-brand-orange/20' : 'theme-text-secondary hover:theme-text hover:theme-bg-subtle')
+                      }
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+                
+                {/* Right Column: Secondary Nav */}
+                <div className="w-1/2 pl-2 border-l theme-border-subtle space-y-1">
+                  <Link to="/stores" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <Store className="w-4 h-4 shrink-0" /> <span className="truncate">Stores</span>
                   </Link>
-                ))}
+                  <Link to="/categories" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <LayoutGrid className="w-4 h-4 shrink-0" /> <span className="truncate">Categories</span>
+                  </Link>
+                  <Link to="/sales" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <Calendar className="w-4 h-4 shrink-0" /> <span className="truncate">June Sales</span>
+                  </Link>
+                  <Link to="/indulge" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <List className="w-4 h-4 shrink-0" /> <span className="truncate">Indulge</span>
+                  </Link>
+                  
+                  <div className="my-2 border-t theme-border-subtle opacity-50"></div>
+                  
+                  <Link to="/submit" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <Plus className="w-4 h-4 shrink-0" /> <span className="truncate">Submit Coupon</span>
+                  </Link>
+                  <Link to="/deals-of-the-day" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
+                    <Zap className="w-4 h-4 shrink-0" /> <span className="truncate">Deals Of The Day</span>
+                  </Link>
+                  <Link to="/fathers-day" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 px-3 py-2 mt-2 bg-gradient-brand text-white text-[11px] font-bold rounded-lg transition-all shadow-sm">
+                    <span className="truncate">Father's Day Offers</span>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

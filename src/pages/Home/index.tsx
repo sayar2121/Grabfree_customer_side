@@ -57,7 +57,7 @@ export default function HomePage() {
 
   const { data: featuredStores, isLoading: storesLoading } = useFeaturedStores();
   const { data: latestCoupons, isLoading: couponsLoading } = useLatestCoupons(8);
-  const { data: trendingDeals, isLoading: dealsLoading } = useTrendingDeals(6);
+  const { data: trendingDeals, isLoading: dealsLoading } = useTrendingDeals(8);
   const { data: latestBlogs, isLoading: blogsLoading } = useLatestBlogs(3);
 
   return (
@@ -65,28 +65,28 @@ export default function HomePage() {
       {/* ── HERO BANNER SLIDER ── */}
       <section className="relative w-full pt-4 pb-2 section-container overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          
+
           {/* Main Hero Banner (75%) */}
           <div className="lg:col-span-3 flex flex-col gap-2">
             <Link to={activeHeroBanner.link} className="w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden relative shadow-md bg-brand-blue group cursor-pointer block">
               <AnimatePresence mode="wait">
-                <motion.img 
+                <motion.img
                   key={activeHeroBanner.id}
                   initial={{ opacity: 0, scale: 1.02 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  src={activeHeroBanner.src} 
-                  alt={activeHeroBanner.alt} 
-                  className="w-full h-full object-cover absolute inset-0" 
+                  src={activeHeroBanner.src}
+                  alt={activeHeroBanner.alt}
+                  className="w-full h-full object-cover absolute inset-0"
                 />
               </AnimatePresence>
             </Link>
             {/* Tabs */}
             <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide px-2">
               {MOCK_HERO_BANNERS.map(banner => (
-                <button 
-                  key={banner.id} 
+                <button
+                  key={banner.id}
                   onClick={() => setActiveHeroBanner(banner)}
                   className={`whitespace-nowrap px-1 py-2 text-[13px] md:text-sm font-semibold border-b-2 transition-colors ${activeHeroBanner.id === banner.id ? 'border-brand-orange text-brand-orange' : 'border-transparent theme-text-secondary hover:text-brand-orange'}`}
                 >
@@ -96,27 +96,27 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Side Banner (25%) */}
-          <div className="lg:col-span-1 flex flex-col gap-2">
+          {/* Side Banner (25%) - Hidden on mobile */}
+          <div className="hidden lg:flex lg:col-span-1 flex-col gap-2">
             <Link to={activeSideBanner.link} className="w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden relative shadow-md bg-white group cursor-pointer border theme-border-subtle block">
               <AnimatePresence mode="wait">
-                <motion.img 
+                <motion.img
                   key={activeSideBanner.id}
                   initial={{ opacity: 0, scale: 1.02 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  src={activeSideBanner.src} 
-                  alt={activeSideBanner.alt} 
-                  className="w-full h-full object-cover absolute inset-0" 
+                  src={activeSideBanner.src}
+                  alt={activeSideBanner.alt}
+                  className="w-full h-full object-cover absolute inset-0"
                 />
               </AnimatePresence>
             </Link>
             {/* Tabs */}
             <div className="flex items-center justify-center gap-6 overflow-x-auto pb-2 scrollbar-hide">
               {MOCK_SIDE_BANNERS.map(banner => (
-                <button 
-                  key={banner.id} 
+                <button
+                  key={banner.id}
                   onClick={() => setActiveSideBanner(banner)}
                   className={`whitespace-nowrap px-1 py-2 text-[13px] md:text-sm font-semibold border-b-2 transition-colors ${activeSideBanner.id === banner.id ? 'border-brand-orange text-brand-orange' : 'border-transparent theme-text-secondary hover:text-brand-orange'}`}
                 >
@@ -130,12 +130,12 @@ export default function HomePage() {
       </section>
 
       {/* ── DIVIDER ── */}
-      <section className="section-container flex items-center justify-center gap-4 py-4 mb-4">
-         <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
-         <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-         <span className="text-xs sm:text-sm md:text-base font-medium theme-text">India's Leading Coupons & Deals Marketplace</span>
-         <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-         <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
+      <section className="section-container flex items-center justify-center gap-4 pt-0 pb-2 mb-2">
+        <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
+        <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
+        <span className="text-xs sm:text-sm md:text-base font-medium theme-text">India's Leading Coupons & Deals Marketplace</span>
+        <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
+        <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
       </section>
 
       {/* ── STATS MARQUEE ── */}
@@ -165,8 +165,8 @@ export default function HomePage() {
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {dealsLoading ? Array(6).fill(0).map((_, i) => <CardSkeleton key={i} />) :
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+          {dealsLoading ? Array(8).fill(0).map((_, i) => <CardSkeleton key={i} />) :
             trendingDeals?.map((deal, i) => <DealCard key={deal.id} deal={deal} index={i} />)}
         </div>
       </section>
@@ -207,7 +207,7 @@ export default function HomePage() {
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {MOCK_POPULAR_OFFERS.map((offer, i) => (
             <PopularOfferCard key={offer.id} offer={offer} index={i} />
           ))}
@@ -228,7 +228,7 @@ export default function HomePage() {
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {couponsLoading ? Array(8).fill(0).map((_, i) => <CardSkeleton key={i} />) :
             latestCoupons?.map((coupon, i) => <CouponCard key={coupon.id} coupon={coupon} index={i} />)}
         </div>
@@ -292,7 +292,7 @@ export default function HomePage() {
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {MOCK_BANK_OFFERS.map((offer, i) => (
             <CouponCard key={offer.id} coupon={offer as any} index={i} />
           ))}
@@ -313,10 +313,10 @@ export default function HomePage() {
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {MOCK_BANK_OFFERS.slice(0, 4).map((offer, i) => (
-            <CouponCard 
-              key={offer.id} 
+            <CouponCard
+              key={offer.id}
               coupon={{
                 id: offer.id,
                 coupon_code: offer.code || 'APPLY',
@@ -332,8 +332,8 @@ export default function HomePage() {
                 click_count: Math.floor(Math.random() * 500) + 100,
                 success_count: Math.floor(Math.random() * 400) + 50,
                 expiry_date: offer.valid_till,
-              } as any} 
-              index={i} 
+              } as any}
+              index={i}
             />
           ))}
         </div>

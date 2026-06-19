@@ -39,14 +39,17 @@ export function getTimeRemaining(expiryDate: string): {
   minutes: number;
   seconds: number;
   expired: boolean;
+  isValid: boolean;
 } {
+  if (!expiryDate) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true, isValid: false };
   const total = new Date(expiryDate).getTime() - new Date().getTime();
-  if (total <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+  if (isNaN(total)) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true, isValid: false };
+  if (total <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true, isValid: true };
   const seconds = Math.floor((total / 1000) % 60);
   const minutes = Math.floor((total / 1000 / 60) % 60);
   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
   const days = Math.floor(total / (1000 * 60 * 60 * 24));
-  return { days, hours, minutes, seconds, expired: false };
+  return { days, hours, minutes, seconds, expired: false, isValid: true };
 }
 
 export function calculateDiscount(oldPrice: number, newPrice: number): number {

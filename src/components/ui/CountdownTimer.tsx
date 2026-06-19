@@ -15,6 +15,8 @@ export default function CountdownTimer({ expiryDate, compact = false }: Countdow
     return () => clearInterval(interval);
   }, [expiryDate]);
 
+  if (!time.isValid) return null;
+
   if (time.expired) {
     return (
       <span className="badge badge-warning text-xs flex items-center gap-1">

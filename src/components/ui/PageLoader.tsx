@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { APP_NAME } from '@/constants';
+import { useThemeStore } from '@/store/themeStore';
 
 export default function PageLoader() {
+  const { isDark } = useThemeStore();
+
   return (
-    <div className="fixed inset-0 z-[100] w-full flex flex-col items-center justify-center gap-10 bg-[#0A0F1C] overflow-hidden">
+    <div className="fixed inset-0 z-[100] w-full flex flex-col items-center justify-center gap-10 theme-bg-primary overflow-hidden">
       
       {/* Background ambient glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -41,9 +44,9 @@ export default function PageLoader() {
         <motion.div
           animate={{ y: [-8, 8, -8] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-24 h-24 rounded-full bg-gradient-to-br from-brand-orange to-brand-violet p-[2px] shadow-[0_0_40px_rgba(249,115,22,0.4)]"
+          className="relative w-24 h-24 rounded-full bg-gradient-to-br from-brand-orange to-brand-violet p-[2px] shadow-[0_0_40px_rgba(249,115,22,0.3)] dark:shadow-[0_0_40px_rgba(249,115,22,0.4)]"
         >
-          <div className="w-full h-full bg-[#0F172A] rounded-full flex items-center justify-center overflow-hidden relative">
+          <div className="w-full h-full bg-white dark:bg-[#0F172A] rounded-full flex items-center justify-center overflow-hidden relative">
             
             {/* Shimmer sweep inside logo */}
             <motion.div 
@@ -72,8 +75,8 @@ export default function PageLoader() {
               key={index}
               animate={{ 
                 y: [0, -10, 0], 
-                color: ['#94A3B8', '#F97316', '#94A3B8'],
-                textShadow: ['0px 0px 0px transparent', '0px 0px 10px rgba(249,115,22,0.8)', '0px 0px 0px transparent']
+                color: [isDark ? '#94A3B8' : '#64748B', '#F97316', isDark ? '#94A3B8' : '#64748B'],
+                textShadow: ['0px 0px 0px transparent', isDark ? '0px 0px 10px rgba(249,115,22,0.8)' : '0px 0px 10px rgba(249,115,22,0.4)', '0px 0px 0px transparent']
               }}
               transition={{ 
                 duration: 2, 

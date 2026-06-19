@@ -34,10 +34,10 @@ export default function CouponCard({ coupon, index = 0 }: CouponCardProps) {
       className="glass-card overflow-hidden group cursor-pointer"
     >
       {/* Top Section */}
-      <div className="p-4 border-b border-white/[0.05]">
-        <div className="flex items-start gap-3">
+      <div className="p-3 sm:p-4 border-b border-white/[0.05]">
+        <div className="flex items-start gap-2 sm:gap-3">
           {/* Store Logo */}
-          <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center p-1.5 shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 sm:p-1.5 shrink-0">
             {coupon.store?.logo ? (
               <img src={coupon.store.logo} alt={coupon.store.name} className="w-full h-full object-contain" />
             ) : (
@@ -56,8 +56,8 @@ export default function CouponCard({ coupon, index = 0 }: CouponCardProps) {
                 </span>
               )}
             </div>
-            <p className="text-xs text-slate-500 font-medium">{coupon.store?.name}</p>
-            <h3 className="text-sm font-semibold text-white leading-tight mt-0.5 line-clamp-2">{coupon.title}</h3>
+            <p className="text-[10px] sm:text-xs theme-text-secondary font-medium">{coupon.store?.name}</p>
+            <h3 className="text-[12px] sm:text-sm font-semibold theme-text leading-tight mt-0.5 line-clamp-2">{coupon.title}</h3>
           </div>
 
           {/* Wishlist */}
@@ -76,30 +76,30 @@ export default function CouponCard({ coupon, index = 0 }: CouponCardProps) {
       </div>
 
       {/* Code Section */}
-      <div className="p-4" style={{ backgroundColor: 'var(--bg-subtle)' }}>
+      <div className="p-3 sm:p-4" style={{ backgroundColor: 'var(--bg-subtle)' }}>
         {/* Masked Code */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex-1 border border-dashed border-brand-orange/30 rounded-lg px-3 py-2" style={{ backgroundColor: 'var(--code-box-bg)' }}>
+        <div className="flex flex-col xl:flex-row items-center gap-2 sm:gap-3 mb-3">
+          <div className="w-full flex-1 border border-dashed border-brand-orange/30 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2" style={{ backgroundColor: 'var(--code-box-bg)' }}>
             <div className="flex items-center justify-between">
-              <span className="font-mono text-sm font-bold text-brand-orange tracking-wider">
+              <span className="font-mono text-[11px] sm:text-sm font-bold text-brand-orange tracking-wider">
                 {coupon.coupon_code ? `${coupon.coupon_code.slice(0, 4)}••••` : 'DEAL••••'}
               </span>
-              <span className="text-xs text-slate-600">{coupon.coupon_code ? coupon.coupon_code.length : 0} chars</span>
+              <span className="text-[10px] sm:text-xs text-slate-600 ml-1">{coupon.coupon_code ? coupon.coupon_code.length : 0} chars</span>
             </div>
           </div>
           <button
             onClick={() => openModal(coupon)}
-            className="btn-brand px-4 py-2 text-xs whitespace-nowrap"
+            className="btn-brand w-full xl:w-auto px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs whitespace-nowrap"
           >
             <span>Get Code</span>
           </button>
         </div>
 
         {/* Stats */}
-        <div className="flex items-center justify-between">
-          <CountdownTimer expiryDate={coupon.expiry_date} compact />
-          <span className="text-xs text-slate-500">
-            <span className="text-green-400 font-semibold">{successRate}%</span> success
+        <div className="flex items-center justify-between gap-1">
+          {coupon.expiry_date ? <CountdownTimer expiryDate={coupon.expiry_date} compact /> : <div />}
+          <span className="text-[10px] sm:text-xs text-slate-500 whitespace-nowrap ml-auto">
+            <span className="text-green-500 font-semibold">{successRate}%</span> success
           </span>
         </div>
       </div>

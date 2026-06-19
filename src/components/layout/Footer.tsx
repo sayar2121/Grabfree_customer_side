@@ -64,9 +64,9 @@ export default function Footer() {
       </div>
 
       <div className="section-container py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Brand & Socials */}
-          <div className="lg:col-span-1 flex flex-col items-start">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1 flex flex-col items-start">
             <Link to="/" className="flex items-center mb-4 inline-block">
               <img src="/Dark%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-40 lg:w-48 h-auto object-contain dark:block hidden" />
               <img src="/Light%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-40 lg:w-48 h-auto object-contain dark:hidden block" />
@@ -99,7 +99,7 @@ export default function Footer() {
           </div>
 
           {/* Speciality Pages */}
-          <div className="lg:ml-8">
+          <div className="col-span-1 lg:ml-8">
             <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-brand-orange"></span>
               Speciality Pages
@@ -114,7 +114,7 @@ export default function Footer() {
           </div>
 
           {/* Offers */}
-          <div>
+          <div className="col-span-1">
             <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-brand-orange"></span>
               Offers
@@ -129,7 +129,7 @@ export default function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-brand-orange"></span>
               Company
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Us */}
-          <div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 mt-2 sm:mt-0">
             <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-brand-orange"></span>
               Contact Us
