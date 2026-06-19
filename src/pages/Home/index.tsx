@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Sparkles, TrendingUp, Store, Zap, ChevronRight } from 'lucide-react';
 import { CATEGORIES, STATS } from '@/constants';
-import { MOCK_CATEGORIES, MOCK_POPULAR_OFFERS, MOCK_BANK_OFFERS } from '@/services/mockData';
+import { MOCK_CATEGORIES, MOCK_POPULAR_OFFERS, MOCK_BANK_OFFERS, MOCK_HERO_BANNERS, MOCK_SIDE_BANNERS } from '@/services/mockData';
 import { useFeaturedStores } from '@/hooks/useStores';
 import { useLatestCoupons } from '@/hooks/useCoupons';
 import { useTrendingDeals } from '@/hooks/useDeals';
@@ -27,7 +27,8 @@ const CardSkeleton = () => (
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeHeroBanner, setActiveHeroBanner] = useState(MOCK_HERO_BANNERS[0]);
+  const [activeSideBanner, setActiveSideBanner] = useState(MOCK_SIDE_BANNERS[0]);
 
   // Handle hash scrolling on page load (e.g. arriving from another page via mobile menu)
   useEffect(() => {
@@ -42,80 +43,99 @@ export default function HomePage() {
     }
   }, []);
 
+  // Auto-cycle main banner every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveHeroBanner(current => {
+        const currentIndex = MOCK_HERO_BANNERS.findIndex(b => b.id === current.id);
+        const nextIndex = (currentIndex + 1) % MOCK_HERO_BANNERS.length;
+        return MOCK_HERO_BANNERS[nextIndex];
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   const { data: featuredStores, isLoading: storesLoading } = useFeaturedStores();
   const { data: latestCoupons, isLoading: couponsLoading } = useLatestCoupons(8);
   const { data: trendingDeals, isLoading: dealsLoading } = useTrendingDeals(6);
   const { data: latestBlogs, isLoading: blogsLoading } = useLatestBlogs(3);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-  };
-
   return (
     <div className="overflow-x-hidden">
-      {/* ── HERO ── */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Background orbs */}
-        <div className="hero-orb w-[600px] h-[600px] bg-brand-orange top-[-100px] left-[-200px]" />
-        <div className="hero-orb w-[500px] h-[500px] bg-brand-violet bottom-[-50px] right-[-100px]" />
-        <div className="hero-orb w-[300px] h-[300px] bg-brand-red top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
-
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(to right, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-
-        <div className="section-container relative z-10 text-center">
-          {/* Badge */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border theme-border-strong theme-bg-subtle text-sm text-brand-orange font-medium mb-6">
-            <Sparkles className="w-4 h-4" />
-            5,000+ Active Deals & Coupons Updated Daily
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black theme-text leading-tight mb-6">
-            Grab the Best<br />
-            <span className="text-gradient">Deals & Coupons</span><br />
-            <span className="theme-text-secondary text-3xl md:text-4xl lg:text-5xl font-bold">in India 🇮🇳</span>
-          </motion.h1>
-
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="theme-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Discover verified promo codes, exclusive deals and cashback offers from 500+ top Indian stores. Save money on every purchase.
-          </motion.p>
-
-          {/* Search */}
-          <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            onSubmit={handleSearch}
-            className="flex gap-3 max-w-2xl mx-auto mb-8">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none z-10" />
-              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for stores, brands or products..."
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck="false"
-                className="input-theme w-full rounded-2xl pl-12 pr-4 py-4 text-base backdrop-blur-sm shadow-card"
-              />
+      {/* ── HERO BANNER SLIDER ── */}
+      <section className="relative w-full pt-4 pb-2 section-container overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          
+          {/* Main Hero Banner (75%) */}
+          <div className="lg:col-span-3 flex flex-col gap-2">
+            <Link to={activeHeroBanner.link} className="w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden relative shadow-md bg-brand-blue group cursor-pointer block">
+              <AnimatePresence mode="wait">
+                <motion.img 
+                  key={activeHeroBanner.id}
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  src={activeHeroBanner.src} 
+                  alt={activeHeroBanner.alt} 
+                  className="w-full h-full object-cover absolute inset-0" 
+                />
+              </AnimatePresence>
+            </Link>
+            {/* Tabs */}
+            <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide px-2">
+              {MOCK_HERO_BANNERS.map(banner => (
+                <button 
+                  key={banner.id} 
+                  onClick={() => setActiveHeroBanner(banner)}
+                  className={`whitespace-nowrap px-1 py-2 text-[13px] md:text-sm font-semibold border-b-2 transition-colors ${activeHeroBanner.id === banner.id ? 'border-brand-orange text-brand-orange' : 'border-transparent theme-text-secondary hover:text-brand-orange'}`}
+                >
+                  {banner.tabName}
+                </button>
+              ))}
             </div>
-            <button type="submit" className="btn-brand px-8 py-4 text-base rounded-2xl">
-              <span className="flex items-center gap-2"><Search className="w-5 h-5" /> Search</span>
-            </button>
-          </motion.form>
+          </div>
 
-          {/* Quick category pills */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-2">
-            {CATEGORIES.slice(0, 8).map((cat) => (
-              <Link key={cat.id} to={`/categories/${cat.slug}`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs pill-inactive">
-                <span>{cat.icon}</span> {cat.name}
-              </Link>
-            ))}
-          </motion.div>
+          {/* Side Banner (25%) */}
+          <div className="lg:col-span-1 flex flex-col gap-2">
+            <Link to={activeSideBanner.link} className="w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden relative shadow-md bg-white group cursor-pointer border theme-border-subtle block">
+              <AnimatePresence mode="wait">
+                <motion.img 
+                  key={activeSideBanner.id}
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  src={activeSideBanner.src} 
+                  alt={activeSideBanner.alt} 
+                  className="w-full h-full object-cover absolute inset-0" 
+                />
+              </AnimatePresence>
+            </Link>
+            {/* Tabs */}
+            <div className="flex items-center justify-center gap-6 overflow-x-auto pb-2 scrollbar-hide">
+              {MOCK_SIDE_BANNERS.map(banner => (
+                <button 
+                  key={banner.id} 
+                  onClick={() => setActiveSideBanner(banner)}
+                  className={`whitespace-nowrap px-1 py-2 text-[13px] md:text-sm font-semibold border-b-2 transition-colors ${activeSideBanner.id === banner.id ? 'border-brand-orange text-brand-orange' : 'border-transparent theme-text-secondary hover:text-brand-orange'}`}
+                >
+                  {banner.tabName}
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
+      </section>
+
+      {/* ── DIVIDER ── */}
+      <section className="section-container flex items-center justify-center gap-4 py-4 mb-4">
+         <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
+         <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
+         <span className="text-xs sm:text-sm md:text-base font-medium theme-text">India's Leading Coupons & Deals Marketplace</span>
+         <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
+         <div className="h-px bg-yellow-400 flex-1 max-w-[30px] sm:max-w-[50px]"></div>
       </section>
 
       {/* ── STATS MARQUEE ── */}

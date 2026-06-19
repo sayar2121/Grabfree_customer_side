@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Heart, Sun, Moon, Menu, X, Tag, ChevronDown } from 'lucide-react';
+import { Search, Heart, Sun, Moon, Menu, X, Store, LayoutGrid, Calendar, List, Plus, Zap } from 'lucide-react';
 import { NAV_LINKS, APP_NAME } from '@/constants';
 import { useThemeStore } from '@/store/themeStore';
 import { useWishlistStore } from '@/store/wishlistStore';
@@ -21,12 +21,11 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { query, setQuery, suggestions, clearSuggestions } = useSearch();
 
-  // Sync activeHash when location changes (like navigating from another page)
+  // Sync activeHash when location changes
   useEffect(() => {
     setActiveHash(location.hash || '');
   }, [location.hash]);
 
-  // Custom active link logic to handle hashes
   const isActiveLink = (path: string) => {
     if (path.startsWith('/#')) {
       return location.pathname === '/' && activeHash === path.substring(1);
@@ -39,35 +38,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Add background when scrolled past top
-      setIsScrolled(currentScrollY > 20);
-      
-      // Hide navbar when scrolling down, show when scrolling up
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      
-      setLastScrollY(currentScrollY);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (path.startsWith('/#')) {
       const id = path.replace('/#', '');
       const element = document.getElementById(id);
       if (element) {
-        // If we're already on the home page, just scroll smoothly
         if (window.location.pathname === '/') {
           e.preventDefault();
-          setIsMobileOpen(false); // Close menu immediately
-          // Add a tiny delay to allow the mobile menu closing animation to finish so the layout shift doesn't cancel the scroll
+          setIsMobileOpen(false);
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth' });
           }, 150);
@@ -97,15 +82,12 @@ export default function Navbar() {
           hidden: { y: '-100%' },
         }}
         initial="visible"
-        animate={hidden ? 'hidden' : 'visible'}
+        animate="visible"
         transition={{ duration: 0.35, ease: 'easeInOut' }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
-          isScrolled
-            ? 'backdrop-blur-xl border-b theme-border-subtle shadow-sm'
-            : 'bg-transparent'
+          'transition-colors duration-300',
+          'theme-bg-primary border-b theme-border-subtle shadow-sm'
         )}
-        style={isScrolled ? { backgroundColor: 'var(--nav-bg-scrolled)' } : undefined}
       >
         <div className="section-container">
           <div className="flex items-center justify-between h-16 lg:h-[70px]">
@@ -120,16 +102,24 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-6">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={(e) => handleNavClick(e, link.path)}
-                  className={cn('nav-link', isActiveLink(link.path) && 'active')}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isActive = isActiveLink(link.path);
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={(e) => handleNavClick(e, link.path)}
+                    className={cn(
+                      'text-sm font-medium transition-colors pb-1 border-b-2',
+                      isActive 
+                        ? 'text-brand-orange border-brand-orange' 
+                        : 'theme-text hover:text-brand-orange border-transparent'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Actions */}
@@ -137,17 +127,17 @@ export default function Navbar() {
               {/* Search Toggle */}
               <button
                 onClick={() => setShowSearch(!showSearch)}
-                className="w-9 h-9 rounded-xl icon-btn-theme flex items-center justify-center"
+                className="w-10 h-10 rounded-xl border theme-border-subtle flex items-center justify-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4 theme-text" />
               </button>
 
               {/* Wishlist */}
               <Link
                 to="/wishlist"
-                className="relative w-9 h-9 rounded-xl icon-btn-theme flex items-center justify-center"
+                className="relative w-10 h-10 rounded-xl border theme-border-subtle flex items-center justify-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                <Heart className="w-4 h-4" />
+                <Heart className="w-4 h-4 theme-text" />
                 {items.length > 0 && (
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-brand rounded-full text-[10px] font-bold text-white flex items-center justify-center">
                     {items.length}
@@ -158,18 +148,52 @@ export default function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-xl icon-btn-theme flex items-center justify-center"
+                className="w-10 h-10 rounded-xl border theme-border-subtle flex items-center justify-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {isDark ? <Sun className="w-4 h-4 theme-text" /> : <Moon className="w-4 h-4 theme-text" />}
               </button>
 
               {/* Mobile Menu */}
               <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="lg:hidden w-9 h-9 rounded-xl icon-btn-theme flex items-center justify-center"
+                className="lg:hidden w-10 h-10 rounded-xl border theme-border-subtle flex items-center justify-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                {isMobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+                {isMobileOpen ? <X className="w-4 h-4 theme-text" /> : <Menu className="w-4 h-4 theme-text" />}
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Secondary Sub-nav (Bottom Tier) */}
+        <div className="border-t theme-border-subtle theme-bg-secondary">
+          <div className="section-container overflow-x-auto scrollbar-hide">
+            <div className="flex items-center justify-between h-12 min-w-max gap-8 pr-4 lg:pr-0">
+              <div className="flex items-center gap-6">
+                <Link to="/stores" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <Store className="w-4 h-4" /> Stores
+                </Link>
+                <Link to="/categories" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <LayoutGrid className="w-4 h-4" /> Categories
+                </Link>
+                <Link to="/sales" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <Calendar className="w-4 h-4" /> June Sales
+                </Link>
+                <Link to="/indulge" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <List className="w-4 h-4" /> Indulge
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-6">
+                <Link to="/submit" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <Plus className="w-4 h-4" /> Submit Coupon
+                </Link>
+                <Link to="/deals-of-the-day" className="flex items-center gap-2 text-sm font-medium theme-text-secondary hover:text-brand-orange transition-colors">
+                  <Zap className="w-4 h-4" /> Deals Of The Day
+                </Link>
+                <Link to="/fathers-day" className="flex items-center gap-2 px-4 py-1.5 bg-gradient-brand hover:opacity-90 text-white text-sm font-medium rounded-full transition-all shadow-sm">
+                  Father's Day Offers
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -246,8 +270,6 @@ export default function Navbar() {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Spacer */}
-      <div className="h-16 lg:h-[70px]" />
     </>
   );
 }

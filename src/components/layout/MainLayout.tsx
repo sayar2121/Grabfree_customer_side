@@ -1,3 +1,4 @@
+import TopBanner from './TopBanner';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -21,7 +22,10 @@ export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col theme-bg-primary">
       <ScrollToTop />
-      <Navbar />
+      <div className="sticky top-0 z-50 w-full flex flex-col">
+        <TopBanner />
+        <Navbar />
+      </div>
       <main className="flex-1">
         <Outlet />
       </main>

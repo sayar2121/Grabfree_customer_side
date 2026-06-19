@@ -50,21 +50,28 @@ export const SOCIAL_LINKS = [
 ];
 
 export const FOOTER_LINKS = {
+  speciality: [
+    { label: 'AI Tools', path: '/ai-tools' },
+    { label: 'Surge 2025', path: '/surge' },
+    { label: 'Blog', path: '/blogs' },
+    { label: 'Product Deals', path: '/product-deals' },
+    { label: 'Charities', path: '/charities' },
+  ],
+  offers: [
+    { label: 'City Offers', path: '/city-offers' },
+    { label: 'Brand Offers', path: '/stores' },
+    { label: 'Bank Offers', path: '/bank-offers' },
+    { label: 'Festival Offers', path: '/festival-offers' },
+    { label: 'Ajio Coupons', path: '/store/ajio' },
+  ],
   company: [
     { label: 'About Us', path: '/about' },
-    { label: 'Contact', path: '/contact' },
-    { label: 'Blog', path: '/blogs' },
-    { label: 'Careers', path: '/careers' },
-  ],
-  quick: [
-    { label: 'Coupons', path: '/coupons' },
-    { label: 'Deals', path: '/deals' },
-    { label: 'Stores', path: '/stores' },
-    { label: 'Bank Offers', path: '/bank-offers' },
-  ],
-  legal: [
     { label: 'Privacy Policy', path: '/privacy' },
-    { label: 'Terms of Service', path: '/terms' },
-    { label: 'Cookie Policy', path: '/cookies' },
+    { label: 'Terms of Use', path: '/terms' },
+    { label: 'Branding', path: '/branding' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Partner With Us', path: '/partner' },
+    { label: 'Sitemap', path: '/sitemap' },
+    { label: 'Feedback', path: '/feedback' },
   ],
 };

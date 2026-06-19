@@ -445,4 +445,155 @@ export const MOCK_POPULAR_OFFERS = [
   }
 ];
 
+export const MOCK_HERO_BANNERS = [
+  {
+    id: 1,
+    tabName: 'Hostinger',
+    src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/hostinger',
+    alt: 'Hostinger Offer',
+    title: 'UP TO 25% OFF + EXTRA 20% OFF On Annual Hosting',
+    code: 'ULTAGRAB',
+    buttonText: 'BUY NOW',
+    color: '#3B82F6'
+  },
+  {
+    id: 2,
+    tabName: 'Redrail',
+    src: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/redrail',
+    alt: 'Redrail Offer',
+    title: 'Flat Rs 500 OFF on Bus Tickets',
+    code: 'RED500',
+    buttonText: 'BOOK NOW',
+    color: '#EF4444'
+  },
+  {
+    id: 3,
+    tabName: 'Coursera',
+    src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/coursera',
+    alt: 'Coursera Offer',
+    title: 'Save 50% OFF on Coursera Plus',
+    code: 'LEARN50',
+    buttonText: 'SUBSCRIBE',
+    color: '#10B981'
+  },
+  {
+    id: 4,
+    tabName: 'Dell',
+    src: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/dell',
+    alt: 'Dell Offer',
+    title: 'Laptops - Up To 40% OFF',
+    code: 'DELL40',
+    buttonText: 'SHOP NOW',
+    color: '#6366F1'
+  },
+  {
+    id: 5,
+    tabName: 'Ulta Host',
+    src: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/ultahost',
+    alt: 'Ulta Host Offer',
+    title: 'UP TO 25% OFF + EXTRA 20% OFF',
+    code: 'ULTA25',
+    buttonText: 'BUY NOW',
+    color: '#8B5CF6'
+  },
+  {
+    id: 6,
+    tabName: 'Google Workspace',
+    src: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/google-workspace',
+    alt: 'Google Workspace Offer',
+    title: 'Special Discount on Google Workspace',
+    code: 'GW10',
+    buttonText: 'GET IT',
+    color: '#3B82F6'
+  },
+  {
+    id: 7,
+    tabName: 'Ajio',
+    src: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/ajio',
+    alt: 'Ajio Offer',
+    title: 'Fashion Sale - Up to 70% OFF',
+    code: 'AJIO70',
+    buttonText: 'SHOP NOW',
+    color: '#14B8A6'
+  },
+  {
+    id: 8,
+    tabName: 'Amazon',
+    src: 'https://images.unsplash.com/photo-1555529733-0e670560f7e1?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/amazon',
+    alt: 'Amazon Offer',
+    title: 'Great Indian Sale',
+    code: 'AMAZON',
+    buttonText: 'SHOP NOW',
+    color: '#F59E0B'
+  },
+  {
+    id: 9,
+    tabName: 'HP',
+    src: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/hp',
+    alt: 'HP Offer',
+    title: 'HP Laptops & Accessories',
+    code: 'HP10',
+    buttonText: 'BUY NOW',
+    color: '#3B82F6'
+  },
+  {
+    id: 10,
+    tabName: 'H&M',
+    src: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1200&auto=format&fit=crop',
+    link: '/deals/hm',
+    alt: 'H&M Offer',
+    title: 'Winter Collection',
+    code: 'HM20',
+    buttonText: 'SHOP NOW',
+    color: '#EC4899'
+  }
+];
 
+export const MOCK_SIDE_BANNERS = [
+  {
+    id: 1,
+    tabName: 'UBER',
+    src: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=600&auto=format&fit=crop',
+    link: '/deals/uber',
+    alt: 'Uber Offer',
+    title: 'FLAT 50% OFF',
+    subtitle: 'Flat 50% OFF First 3 Uber Rides — Up to ₹100 Per Ride',
+    code: 'GRAB NOW'
+  },
+  {
+    id: 2,
+    tabName: 'Udemy',
+    src: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=600&auto=format&fit=crop',
+    link: '/deals/udemy',
+    alt: 'Udemy Offer',
+    title: 'Courses starting at ₹499',
+    subtitle: 'Learn new skills',
+    code: 'GRAB NOW'
+  },
+  {
+    id: 3,
+    tabName: 'Google Workspace',
+    src: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?q=80&w=600&auto=format&fit=crop',
+    link: '/deals/google',
+    alt: 'Google Workspace Offer',
+    title: 'Get 10% OFF on first year',
+    subtitle: 'Business Starter',
+  }
+];
+
+export const MOCK_TOP_BANNER = {
+  id: 'tb1',
+  text: 'Up to Rs.10,000 OFF On Travel Bookings with AU LIT Credit Card',
+  buttonText: 'APPLY NOW',
+  link: '/deals/au-lit',
+  iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/AU_Small_Finance_Bank_Logo.png/600px-AU_Small_Finance_Bank_Logo.png',
+};

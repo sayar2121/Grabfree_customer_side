@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tag, Send, Mail, Phone, MapPin, CheckCircle, AlertCircle, MessageCircle, Globe, Share2, AtSign } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, CheckCircle, AlertCircle, Headphones } from 'lucide-react';
+import { FaWhatsapp, FaFacebookF, FaXTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPinterestP, FaTelegram } from 'react-icons/fa6';
 import { APP_NAME, FOOTER_LINKS } from '@/constants';
 import { newsletterService } from '@/services/newsletterService';
 
@@ -22,10 +23,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="theme-bg-footer border-t theme-border-subtle mt-16">
+    <footer className="theme-bg-footer border-t theme-border-subtle mt-8">
       {/* Newsletter Banner */}
       <div className="bg-gradient-to-r from-brand-orange/10 via-brand-red/5 to-brand-violet/10 border-b border-white/[0.06]">
-        <div className="section-container py-12">
+        <div className="section-container py-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">
@@ -62,84 +63,118 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="section-container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center mb-6 inline-block">
-              <img src="/Dark%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-56 lg:w-64 h-auto object-contain dark:block hidden" />
-              <img src="/Light%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-56 lg:w-64 h-auto object-contain dark:hidden block" />
+      <div className="section-container py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
+          {/* Brand & Socials */}
+          <div className="lg:col-span-1 flex flex-col items-start">
+            <Link to="/" className="flex items-center mb-4 inline-block">
+              <img src="/Dark%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-40 lg:w-48 h-auto object-contain dark:block hidden" />
+              <img src="/Light%20Mode%20Logo_NOBG.png" alt={APP_NAME} className="w-40 lg:w-48 h-auto object-contain dark:hidden block" />
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
-              India's most trusted coupon and deal aggregation platform. Save money on every purchase with verified promo codes.
+            <p className="text-slate-400 text-sm leading-relaxed mb-4 max-w-[250px]">
+              Striving towards making the world a better place to shop with great savings!
             </p>
-            <div className="flex items-center gap-3">
+            
+            <div className="grid grid-cols-4 gap-2 mb-4">
               {[
-                { icon: AtSign, url: 'https://twitter.com' },
-                { icon: MessageCircle, url: 'https://instagram.com' },
-                { icon: Globe, url: 'https://facebook.com' },
-                { icon: Send, url: 'https://t.me' },
-              ].map(({ icon: Icon, url }, i) => (
+                { icon: FaWhatsapp, url: '#', bg: 'bg-[#25D366]' },
+                { icon: FaFacebookF, url: '#', bg: 'bg-[#1877F2]' },
+                { icon: FaXTwitter, url: '#', bg: 'bg-black text-white' },
+                { icon: FaLinkedinIn, url: '#', bg: 'bg-[#0A66C2]' },
+                { icon: FaInstagram, url: '#', bg: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]' },
+                { icon: FaYoutube, url: '#', bg: 'bg-[#FF0000]' },
+                { icon: FaPinterestP, url: '#', bg: 'bg-[#E60023]' },
+                { icon: FaTelegram, url: '#', bg: 'bg-[#229ED9]' },
+              ].map(({ icon: Icon, url, bg }, i) => (
                 <a key={i} href={url} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-orange/40 hover:bg-brand-orange/10 transition-all">
-                  <Icon className="w-4 h-4" />
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity ${bg}`}>
+                  <Icon className="w-4 h-4" strokeWidth={2} />
                 </a>
               ))}
             </div>
+            
+            <p className="text-slate-400 text-xs leading-relaxed max-w-[250px]">
+              We may earn a commission if you buy through links on GrabFree. For more details refer to our <Link to="/terms" className="text-brand-orange hover:underline">terms of use</Link>.
+            </p>
+          </div>
+
+          {/* Speciality Pages */}
+          <div className="lg:ml-8">
+            <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-brand-orange"></span>
+              Speciality Pages
+            </h4>
+            <ul className="space-y-2">
+              {FOOTER_LINKS.speciality.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path} className="text-slate-300 text-sm hover:text-white transition-colors">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Offers */}
+          <div>
+            <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-brand-orange"></span>
+              Offers
+            </h4>
+            <ul className="space-y-2">
+              {FOOTER_LINKS.offers.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path} className="text-slate-300 text-sm hover:text-white transition-colors">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-brand-orange"></span>
+              Company
+            </h4>
+            <ul className="space-y-2">
               {FOOTER_LINKS.company.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-slate-400 text-sm hover:text-brand-orange transition-colors">{link.label}</Link>
+                  <Link to={link.path} className="text-slate-300 text-sm hover:text-white transition-colors">{link.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Contact Us */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2.5">
-              {FOOTER_LINKS.quick.map((link) => (
-                <li key={link.path}>
-                  <Link to={link.path} className="text-slate-400 text-sm hover:text-brand-orange transition-colors">{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2.5 text-slate-400 text-sm">
-                <Mail className="w-4 h-4 mt-0.5 text-brand-orange shrink-0" /> hello@grabfree.in
+            <h4 className="text-brand-orange text-sm font-semibold mb-4 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-brand-orange"></span>
+              Contact Us
+            </h4>
+            <ul className="space-y-2 mb-4">
+              <li className="flex items-start gap-3 text-slate-300 text-sm">
+                <Mail className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" /> contact@grabfree.in
               </li>
-              <li className="flex items-start gap-2.5 text-slate-400 text-sm">
-                <Phone className="w-4 h-4 mt-0.5 text-brand-orange shrink-0" /> +91 98765 43210
+              <li className="flex items-start gap-3 text-slate-300 text-sm">
+                <Phone className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" /> +91-9945129062
               </li>
-              <li className="flex items-start gap-2.5 text-slate-400 text-sm">
-                <MapPin className="w-4 h-4 mt-0.5 text-brand-orange shrink-0" /> Bengaluru, Karnataka, India
+              <li className="flex items-start gap-3 text-slate-300 text-sm leading-relaxed">
+                <MapPin className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" /> 
+                <span>GrabFree<br/>1st Cross Street, Near Bright Way School, Bellandur</span>
               </li>
             </ul>
+            <a href="mailto:contact@grabfree.in" className="inline-flex items-center gap-2 bg-[#4279D1] hover:bg-[#3462a8] text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors">
+              <Headphones className="w-4 h-4" /> Contact Us
+            </a>
           </div>
         </div>
 
-        <div className="border-t border-white/[0.06] mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} {APP_NAME}. All rights reserved.
+        {/* Bottom Hash Banner & Copyright */}
+        <div className="mt-6 pt-6 border-t border-dashed border-slate-700/50 flex flex-col items-center justify-center text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-orange mb-2">#GrabMorePayLess</h2>
+          <p className="text-slate-300 text-sm md:text-base mb-8">We Help You Save On Everything</p>
+          
+          <p className="text-slate-500 text-xs text-center max-w-2xl mx-auto">
+            © Copyright {new Date().getFullYear()} Grabfree. All Rights Reserved. Designed With Care By Grabfree Team.
           </p>
-          <div className="flex items-center gap-4">
-            {FOOTER_LINKS.legal.map((link) => (
-              <Link key={link.path} to={link.path} className="text-slate-500 text-xs hover:text-slate-300 transition-colors">
-                {link.label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
