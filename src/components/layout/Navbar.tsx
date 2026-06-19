@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Heart, Sun, Moon, Menu, X, Store, LayoutGrid, Calendar, List, Plus, Zap } from 'lucide-react';
+import { Search, Heart, Sun, Moon, Menu, X, Store, LayoutGrid, Calendar, List, Plus, Zap, User } from 'lucide-react';
 import { NAV_LINKS, APP_NAME } from '@/constants';
 import { useThemeStore } from '@/store/themeStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { useSearch } from '@/hooks/useSearch';
+import { useLoginModalStore } from '@/store/loginModalStore';
+import { useAuthStore } from '@/store/authStore';
 import { cn } from '@/lib/utils';
 
 export default function Navbar() {
@@ -18,6 +20,8 @@ export default function Navbar() {
   const [activeHash, setActiveHash] = useState(location.hash || '');
   const { isDark, toggleTheme } = useThemeStore();
   const { items } = useWishlistStore();
+  const { openLoginModal } = useLoginModalStore();
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
   const { query, setQuery, suggestions, clearSuggestions } = useSearch();
 
@@ -152,6 +156,23 @@ export default function Navbar() {
               >
                 {isDark ? <Sun className="w-4 h-4 theme-text" /> : <Moon className="w-4 h-4 theme-text" />}
               </button>
+
+              {/* Auth Button */}
+              {isLoggedIn ? (
+                <Link
+                  to="/profile"
+                  className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-gradient-brand text-white shadow-brand-sm hover:shadow-brand transition-all hover:-translate-y-0.5"
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+              ) : (
+                <button
+                  onClick={openLoginModal}
+                  className="hidden lg:flex items-center justify-center px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl shadow-brand-sm hover:shadow-brand transition-all hover:-translate-y-0.5"
+                >
+                  Login
+                </button>
+              )}
 
               {/* Mobile Menu */}
               <button
@@ -291,9 +312,19 @@ export default function Navbar() {
                   <Link to="/deals-of-the-day" onClick={() => setIsMobileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[13px] font-medium theme-text-secondary hover:theme-text hover:theme-bg-subtle transition-all">
                     <Zap className="w-4 h-4 shrink-0" /> <span className="truncate">Deals Of The Day</span>
                   </Link>
-                  <Link to="/fathers-day" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 px-3 py-2 mt-2 bg-gradient-brand text-white text-[11px] font-bold rounded-lg transition-all shadow-sm">
+                  <Link to="/fathers-day" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 px-3 py-2 mt-2 border border-brand-orange text-brand-orange hover:bg-brand-orange/10 text-[11px] font-bold rounded-lg transition-all">
                     <span className="truncate">Father's Day Offers</span>
                   </Link>
+                  {isLoggedIn ? (
+                    <Link to="/profile" onClick={() => setIsMobileOpen(false)} className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 bg-gradient-brand text-white text-[12px] font-bold rounded-lg transition-all shadow-sm">
+                      <User className="w-4 h-4" />
+                      <span className="truncate">My Profile</span>
+                    </Link>
+                  ) : (
+                    <button onClick={() => { setIsMobileOpen(false); openLoginModal(); }} className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 bg-gradient-brand text-white text-[12px] font-bold rounded-lg transition-all shadow-sm">
+                      <span className="truncate">Login / Sign Up</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

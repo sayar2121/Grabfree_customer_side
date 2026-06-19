@@ -17,6 +17,8 @@ const BankOffersPage = lazy(() => import('@/pages/BankOffers'));
 const AboutPage = lazy(() => import('@/pages/About'));
 const ContactPage = lazy(() => import('@/pages/Contact'));
 const CareersPage = lazy(() => import('@/pages/Careers'));
+const SubmitCouponPage = lazy(() => import('@/pages/SubmitCoupon'));
+const ProfilePage = lazy(() => import('@/pages/Profile'));
 const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
 // Legal Pages
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
       { path: 'about', element: <Suspense fallback={<PageLoader />}><AboutPage /></Suspense> },
       { path: 'contact', element: <Suspense fallback={<PageLoader />}><ContactPage /></Suspense> },
       { path: 'careers', element: <Suspense fallback={<PageLoader />}><CareersPage /></Suspense> },
+      { path: 'submit', element: <Suspense fallback={<PageLoader />}><SubmitCouponPage /></Suspense> },
+      { path: 'profile', element: <Suspense fallback={<PageLoader />}><ProfilePage /></Suspense> },
       
       // Legal routes
       { path: 'privacy', element: <Suspense fallback={<PageLoader />}><PrivacyPolicyPage /></Suspense> },

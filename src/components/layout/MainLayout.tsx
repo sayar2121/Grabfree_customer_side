@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { Outlet, useLocation } from 'react-router-dom';
 import CouponRevealModal from '@/components/coupons/CouponRevealModal';
+import LoginModal from '@/components/ui/LoginModal';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import { useEffect } from 'react';
 
@@ -32,6 +33,7 @@ export default function MainLayout() {
       </main>
       <Footer />
       <CouponRevealModal />
+      <LoginModal />
       <ScrollToTopButton />
     </div>
   );
